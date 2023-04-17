@@ -12,7 +12,10 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
-
-
     def __str__(self):
         return str(self.title)
+
+    # count how many liked  
+    @property
+    def like_count(self):
+        return self.liked.all().count()
