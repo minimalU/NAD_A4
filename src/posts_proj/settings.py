@@ -60,7 +60,7 @@ ROOT_URLCONF = 'posts_proj.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        #
+        # setup for Django looks for templates
         'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
