@@ -24,7 +24,7 @@ const getCookie = (name) => {
 const csrftoken = getCookie('csrftoken');
 
 
-// function likeUnlikePosts
+// Like button with ajax - part2 4:30
 const likeUnlikePosts = () => {
     const likeUnlikeForms = [...document.getElementsByClassName('like-unlike-forms')]
     likeUnlikeForms.forEach(form=> form.addEventListener('submit', e=>{
@@ -32,21 +32,27 @@ const likeUnlikePosts = () => {
         const clickedId = e.target.getAttribute('data-form-id')
         const clickedBtn = document.getElementById(`liked-unlike-${clickedId}`)
 
-        $.ajax({
-            type: 'POST',
-            url: "/like-unlike/",
-            data: {
-                'csrfmiddlewaretoken': csrftoken,
-                'pk': clickedId,
-            },
-            success: function(response){
-                console.log(response)
-                clickedBtn.textContent = response.liked ? `Unlike (${response.count})`: `Like (${response.count})`
-            },
-            error: function(error){
-                console.log(error)
-            }
-        })
+        // if (clickedBtn) {
+            $.ajax({
+                type: 'POST',
+                url: "/like-unlike/",
+                data: {
+                    'csrfmiddlewaretoken': csrftoken,
+                    'pk': clickedId,
+                },
+                success: function(response){
+                    console.log(response)
+                    clickedBtn.textContent = response.liked ? `Unlike (${response.count})`: `Like (${response.count})`
+                },
+                error: function(error){
+                    console.log(error)
+                }
+            })
+        // } else {
+        //     console.log("clickedBtn is not true")
+        // }
+
+        
 
     }))
 }
