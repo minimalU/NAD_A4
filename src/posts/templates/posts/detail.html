@@ -21,7 +21,6 @@
                 <div class="modal-body">
                     <div id="alert-box"> </div>
                     <form id="update-form">
-
                         {% csrf_token %}
                         {{ form|crispy }}
                         {% comment %} {{ form.as_p }} {% endcomment %}

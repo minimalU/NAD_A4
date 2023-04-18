@@ -34,6 +34,13 @@ const getCookie = (name) => {
 }
 const csrftoken = getCookie('csrftoken');
 
+const deleted = localStorage.getItem('title')
+console.log('deleted:', deleted)
+if (deleted){
+    handleAlerts('danger', `deleted "${deleted}"`)
+    localStorage.clear()
+}
+
 
 // Like button with ajax - part2 4:30
 const likeUnlikePosts = () => {
