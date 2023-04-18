@@ -136,7 +136,7 @@ postForm.addEventListener('submit', e=>{
 
     $.ajax({
         type: 'POST',
-        url: 's',
+        url: '',
         data: {
             'csrfmiddlewaretoken': csrf[0].value,
             'title': title.value,
@@ -167,6 +167,8 @@ postForm.addEventListener('submit', e=>{
             likeUnlikePosts() // *****
             $('#addPostModal').modal('hide')
             handleAlerts('success', 'New post added!')
+            // Resetting the form after adding new posts
+            postForm.reset()
         },
         error: function(error){
             console.log(error)
