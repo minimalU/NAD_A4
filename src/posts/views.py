@@ -24,6 +24,13 @@ def post_list_and_create(request):
             instance = form.save(commit=False)
             instance.author = author
             instance.save()
+            return JsonResponse({
+                'title': instance.title,
+                'body': instance.body,
+                'author': instance.author.user.username,
+                'id': instance.id
+            })
+        
     context = {
         # 'qs': qs,
         'form': form,
@@ -32,27 +39,27 @@ def post_list_and_create(request):
 
 # with each button click we are going to run this function view and add new posts by slicing with lower-upper boundaries
 def load_post_data_view(request, num_posts):
-    visible = 3
-    upper = num_posts 
-    lower = upper - visible 
-    size = Post.objects.all().count()
     
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        visible = 3
+        upper = num_posts 
+        lower = upper - visible 
+        size = Post.objects.all().count()
+        
+        qs = Post.objects.all()
+        data = []
+        for obj in qs:
+            item = {
+                'id': obj.id,
+                'title': obj.title,
+                'body' : obj.body,
+                'liked': True if request.user in obj.liked.all() else False,
+                'count': obj.like_count,
+                'author' : obj.author.user.username           
+            }
+            data.append(item)
 
-    qs = Post.objects.all()
-    data = []
-    for obj in qs:
-        item = {
-            'id': obj.id,
-            'title': obj.title,
-            'body' : obj.body,
-            'liked': True if request.user in obj.liked.all() else False,
-            'count': obj.like_count,
-            'author' : obj.author.user.username           
-        }
-        data.append(item)
-
-
-    return JsonResponse({'data': data[lower:upper], 'size': size})
+        return JsonResponse({'data': data[lower:upper], 'size': size})
 
 
 # Like button with ajax - part2 12:00

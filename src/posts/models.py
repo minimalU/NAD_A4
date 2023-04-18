@@ -19,3 +19,7 @@ class Post(models.Model):
     @property
     def like_count(self):
         return self.liked.all().count()
+    
+    # Creating Posts with Ajax 9:30
+    class Meta:
+        ordering = ("-created",)
