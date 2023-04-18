@@ -103,8 +103,8 @@ deleteForm.addEventListener('submit', e=>{
             'csrfmiddlewaretoken': csrf[0].value,
         },
         success: function(response){
-            localStorage.setItem('title', titleInput.value)
             window.location.href = window.location.origin
+            localStorage.setItem('title', titleInput.value)
         },
         error: function(error){
             console.log(error)

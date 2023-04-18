@@ -182,4 +182,4 @@ postForm.addEventListener('submit', e=>{
     })
 })
 
-getData()
+getData() 
