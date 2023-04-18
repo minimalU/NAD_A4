@@ -29,7 +29,16 @@ posts
                             <button type="submit" class="btn btn-success">+ add</button>
                         </div>
                     </form>
-                </div>s
+
+                    {% comment %} Adding Dropzone JS to the Project {% endcomment %}
+                    <form action="/uplaod" class="dropzone">
+                        {% csrf_token %}
+                        <div class-"fallback">
+                            <input name="file" type="file" multiple />
+                        </div>
+                    </form>
+
+                </div>
                 
             </div>
         </div>
