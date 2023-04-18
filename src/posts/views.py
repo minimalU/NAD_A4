@@ -72,8 +72,19 @@ def load_post_data_view(request, num_posts):
                 'author' : obj.author.user.username           
             }
             data.append(item)
-
         return JsonResponse({'data': data[lower:upper], 'size': size})
+    
+#Working on the Post Detail Page - Part 2
+def post_detail_data_view(request, pk):
+    obj = Post.objects.get(pk=pk)
+    data = {
+        'id': obj.id,
+        'title': obj.title,
+        'body': obj.body,
+        'author': obj.author.user.username,
+        'logged_in': request.user.username,
+    }
+    return JsonResponse({'data': data})
 
 
 # Like button with ajax - part2 12:00

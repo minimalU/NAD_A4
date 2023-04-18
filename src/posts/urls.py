@@ -3,8 +3,8 @@ from .views import (
     post_list_and_create,
     load_post_data_view,
     like_unlike_post,
-    post_detail
-
+    post_detail,
+    post_detail_data_view
 )
 
 app_name = 'posts'
@@ -16,6 +16,6 @@ urlpatterns = [
 
     # how many post we should display
     path('data/<int:num_posts>/', load_post_data_view, name='posts-data'),
-    
+    path('<pk>/data/', post_detail_data_view, name='post-detail-data'),
     
 ]
