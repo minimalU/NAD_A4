@@ -62,7 +62,7 @@
         <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 {% for p in obj.get_photos %}
-                    <div class="carousel-item active">
+                    <div class="carousel-item {% if forloop.counter == 1%}active{% endif %}">
                         <img src="{{p.image.url}}" class="d-block w-100" alt="photo {{obj.pk}}">
                     </div>
                 {% endfor %}   
@@ -83,8 +83,8 @@
 
 
     <button id="back-btn" class="btn btn-info">back</button>
-    <button id="update-btn" class="btn btn-primary not-visible" data-bs-toggle="modal" data-bs-target="#updateModal">update</button>
-    <button id="delete-btn" class="btn btn-danger not-visible" data-bs-toggle="modal" data-bs-target="#deleteModal">delete</button>
+    <button id="update-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateModal">update</button>
+    <button id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">delete</button>
     <div id="spinner-box" class="text-center">
         <div class="spinner-border" role="status"></div>
     </div>

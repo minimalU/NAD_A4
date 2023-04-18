@@ -35,9 +35,9 @@ $.ajax({
             updateBtn.classList.remove('not-visible')
             deleteBtn.classList.remove('not-visible')
         } else {
-            console.log('the same')
-            updateBtn.classList.remove('visible')
-            deleteBtn.classList.remove('visible')
+            console.log('same author')
+            // updateBtn.classList.remove('visible')
+            // deleteBtn.classList.remove('visible')
         }
 
         // Working on the Post Detail Page - Part 4
