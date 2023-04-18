@@ -203,6 +203,8 @@ closeBtns.forEach(btn => {
             else{
                 // dropzone.classList.add('visible')
             }
+            const myDropzone = Dropzone.forElement("#my-dropzone")
+            myDropzone.removeAllFiles(true)
         }
         else {
             return
