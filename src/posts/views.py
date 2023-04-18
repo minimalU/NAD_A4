@@ -37,6 +37,20 @@ def post_list_and_create(request):
     }
     return render(request, 'posts/main.html', context)
 
+
+# Creating the Post Detail Page
+def post_detail(request, pk):
+    obj = Post.objects.get(pk=pk)
+    form = PostForm()
+
+    context = {
+        'obj': obj,
+        'form': form,
+    }
+
+    return render(request, 'posts/detail.html', context)
+
+
 # with each button click we are going to run this function view and add new posts by slicing with lower-upper boundaries
 def load_post_data_view(request, num_posts):
     
