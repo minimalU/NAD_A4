@@ -4,6 +4,7 @@ from django.http import JsonResponse, HttpResponse
 from .forms import PostForm
 from profiles.models import Profile
 from .utils import action_permission
+from django.contrib.auth.decorators import login_required
 
 # is_ajax() is depreciated
 from django.http import HttpResponse 
@@ -13,7 +14,7 @@ from django.views.decorators.http import require_http_methods
 #from django.core import serializers
 
 # Create your views here.
-
+@login_required
 def post_list_and_create(request):
     # Adding a form to the Modal
     form = PostForm(request.POST or None)
@@ -40,6 +41,7 @@ def post_list_and_create(request):
 
 
 # Creating the Post Detail Page
+@login_required
 def post_detail(request, pk):
     obj = Post.objects.get(pk=pk)
     form = PostForm()
@@ -53,6 +55,7 @@ def post_detail(request, pk):
 
 
 # with each button click we are going to run this function view and add new posts by slicing with lower-upper boundaries
+@login_required
 def load_post_data_view(request, num_posts):
     
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
@@ -76,6 +79,7 @@ def load_post_data_view(request, num_posts):
         return JsonResponse({'data': data[lower:upper], 'size': size})
     
 #Working on the Post Detail Page - Part 2
+@login_required
 def post_detail_data_view(request, pk):
     obj = Post.objects.get(pk=pk)
     data = {
@@ -89,6 +93,7 @@ def post_detail_data_view(request, pk):
 
 
 # Like button with ajax - part2 12:00
+@login_required
 def like_unlike_post(request):
     # if request.is_ajax():
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
@@ -104,6 +109,8 @@ def like_unlike_post(request):
 
 
 # Writing Update and Delete Views
+@login_required
+@action_permission
 def update_post(request, pk):
     obj = Post.objects.get(pk=pk)
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
@@ -117,6 +124,7 @@ def update_post(request, pk):
             'body': new_body
         })
 
+@login_required
 @action_permission
 def delete_post(request, pk):
     obj = Post.objects.get(pk=pk)
